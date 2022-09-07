@@ -1,11 +1,27 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public static class VoxelData {
 
-	public static readonly int ChunkWidth = 5;
-	public static readonly int ChunkHeight = 15;
+	public static readonly int ChunkWidth = 16;
+	public static readonly int ChunkHeight = 128;
+    public static readonly int WorldSizeInChunks = 100;
+
+    public static int WorldSizeInVoxels {
+
+        get { return WorldSizeInChunks * ChunkWidth; }
+
+    }
+
+    public static readonly int ViewDistanceInChunks = 5;
+
+    public static readonly int TextureAtlasSizeInBlocks = 4;
+    public static float NormalizedBlockTextureSize {
+
+        get { return 1f / (float)TextureAtlasSizeInBlocks; }
+
+    }
 
 	public static readonly Vector3[] voxelVerts = new Vector3[8] {
 
@@ -32,6 +48,8 @@ public static class VoxelData {
 	};
 
 	public static readonly int[,] voxelTris = new int[6,4] {
+
+        // Back, Front, Top, Bottom, Left, Right
 
 		// 0 1 2 2 1 3
 		{0, 3, 1, 2}, // Back Face
